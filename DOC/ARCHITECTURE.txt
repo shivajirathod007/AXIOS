@@ -1,0 +1,47 @@
+                            [ Input: PDF or JPG Document ]
+                                         |
++-----------------------------------------------------------------------------------+
+|                        PREPROCESSING ENGINE (CPU-Bound)                           |
+| - Converts PDFs into sequential JPEGs (e.g., `xyz_page_1.jpg`, `xyz_page_2.jpg`). |
+| - Standardizes DPI to ensure consistent bounding box coordinate mapping.          |
++-----------------------------------------------------------------------------------+
+                                         |
+                                (Parallel Fan-Out)
+           +-----------------------------+-----------------------------+
+           |                             |                             |
+           v                             v                             v
++-----------------------+   +-----------------------+   +---------------------------+
+| TIER 1: Spatial Math  |   | TIER 2: Exact Match   |   | TIER 3: Visual Forensics  |
+| (PyTesseract + NumPy) |   | (OpenCV SIFT/DBSCAN)  |   | (ELA + Contours + FFT)    |
++-----------------------+   +-----------------------+   +---------------------------+
+| Targets: C2, C7       |   | Targets: C1           |   | Targets: C3, C4, C5, C6,  |
+|                       |   |                       |   |          C8, C9           |
+| Mechanism:            |   | Mechanism:            |   | Mechanism:                |
+| - Calculates OCR Box  |   | - Extracts visual     |   | - ELA Map -> Math Contours|
+|   Intersection (IoU). |   |   keypoints.          |   | - FFT -> ONNX INT8 Model  |
+| - Calculates Word Gap |   | - Clusters identical  |   |   (Pre-trained Academic   |
+|   Standard Deviation. |   |   points spatially.   |   |   Deepfake weights).      |
++-----------------------+   +-----------------------+   +---------------------------+
+           |                             |                             |
+           +-----------------------------+-----------------------------+
+                                         |
+                                     (Fan-In)
+                                         v
++-----------------------------------------------------------------------------------+
+|                   AGGREGATION & CONTEXT ENGINE (The Brains)                       |
+| - Applies Non-Maximum Suppression (NMS) to merge overlapping bounding boxes.      |
+| - Deduces categories by comparing ELA anomalies with the original RGB pixels.     |
+| - Enforces the hackathon rule: "Select the most dominant manipulation first."     |
++-----------------------------------------------------------------------------------+
+                                         |
+                                         v
++-----------------------------------------------------------------------------------+
+|                        FORMAT CONTROLLER (Compliance)                             |
+| - Generates syntactically correct JSON entries.                                   |
+| - Generates YAML files with specific dynamic fields (`type`, `stretch_factor`).   |
+| - Ignores YAML generation for C8 and C10.                                         |
++-----------------------------------------------------------------------------------+
+                                         |
+                       +-----------------+-----------------+
+                       v                                   v
+             [ submission.json ]                 [ xyz_page_1.yaml ]
