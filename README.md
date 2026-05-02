@@ -1,6 +1,6 @@
 <div align="center">
 
-# AXIOS — NHA Hackathon · Problem Statement 3
+# AXIOM — NHA Hackathon · Problem Statement 3
 
 **Document Forgery Detection Pipeline**
 
@@ -88,7 +88,7 @@ The pipeline strictly adheres to the hackathon guidelines:
 
 ## &#x25C6; Why This Architecture Wins — Engineering Rationale
 
-Many deepfake and forgery detection systems rely on heavy Vision-Language Models (VLMs) or large-scale neural networks. The **AXIOS Computer Vision Hybrid Engine** was designed from the ground up to outperform those approaches within the strict constraints of the NHA Hackathon environment. Below is a precise account of our engineering decisions and why they translate to a dominant F1 score.
+Many deepfake and forgery detection systems rely on heavy Vision-Language Models (VLMs) or large-scale neural networks. The **AXIOM Computer Vision Hybrid Engine** was designed from the ground up to outperform those approaches within the strict constraints of the NHA Hackathon environment. Below is a precise account of our engineering decisions and why they translate to a dominant F1 score.
 
 ---
 
@@ -104,7 +104,7 @@ Our pipeline uses **deterministic mathematical engines** — OpenCV contours, Te
 
 Heavy deep learning inference requires GPU acceleration to remain viable at scale. On a standard **4-core vCPU** cloud instance, pushing 800+ high-resolution medical documents through a VLM results in massive timeouts and out-of-memory crashes.
 
-**The AXIOS solution:** We rely entirely on **highly optimized C++ binaries** running under the Python runtime — OpenCV, NumPy, PyTesseract. Our engine processes complex multi-page PDFs and high-resolution images in seconds, completely bypassing the need for GPU acceleration or paid API calls.
+**The AXIOM solution:** We rely entirely on **highly optimized C++ binaries** running under the Python runtime — OpenCV, NumPy, PyTesseract. Our engine processes complex multi-page PDFs and high-resolution images in seconds, completely bypassing the need for GPU acceleration or paid API calls.
 
 ---
 
@@ -151,8 +151,8 @@ A single document may simultaneously be a stitched page (`C5`), contain erased t
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/shivajirathod007/AXIOS.git
-cd AXIOS-main
+git clone https://github.com/shivajirathod007/AXIOM.git
+cd AXIOM-main
 ```
 
 **2. Create and activate a virtual environment** *(recommended)*
