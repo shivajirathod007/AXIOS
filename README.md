@@ -133,7 +133,7 @@ Place target claim documents (PDFs, JPGs, PNGs) into the input directory:
 
 ```bash
 # Using the main script
-python main.py
+python main.py # but prefer running the cells
 
 # Or run all cells in the provided Jupyter Notebook
 ```
